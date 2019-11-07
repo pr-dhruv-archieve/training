@@ -1,4 +1,4 @@
-package com.soma.step5.java7.exercise;
+package com.soma.step5.java8.exercise;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import java.util.List;
 import com.soma.step5.java7.entity.Person;
 import com.soma.step5.java7.interfaces.Condition;
 
-public class Exercise {
+public class Exercise1 {
 
 	public static void main(String[] args) {
 
@@ -24,47 +24,23 @@ public class Exercise {
 				new Person("Nivesh", "Prajapati", 21));
 
 		// Step 1
-		Collections.sort(peoples, new Comparator<Person>() {
-
-			@Override
-			public int compare(Person a, Person b) {
-				return a.getLastName().compareTo(b.getLastName());
-			}
-
-		});
+		Collections.sort(peoples, (person1, person2) -> person1.getLastName().compareTo(person2.getLastName()));
 
 		// Step 2
 		System.out.println("Printing all persons");
 		System.out.println("============================================================");
-		printAll(peoples);
+		printfConditionally(peoples, p -> true);
 		System.out.println("============================================================\n");
 
 		// Step 3
-		System.out.println("Person last name starts with P");
-		System.out.println("============================================================");
-		printLastNameBeginWith(peoples, "P");
-		System.out.println("============================================================\n");
-
 		System.out.println("Person last name starts with G (Using interfacee)");
 		System.out.println("============================================================");
-		printfConditionally(peoples, new Condition() {
-
-			@Override
-			public boolean test(Person person) {
-				return person.getLastName().startsWith("G");
-			}
-		});
+		printfConditionally(peoples, p -> p.getLastName().startsWith("G"));
 		System.out.println("============================================================\n");
 
 		System.out.println("Person last name starts with P (using interface)");
 		System.out.println("============================================================");
-		printfConditionally(peoples, new Condition() {
-
-			@Override
-			public boolean test(Person person) {
-				return person.getLastName().startsWith("P");
-			}
-		});
+		printfConditionally(peoples, p -> p.getLastName().startsWith("P"));
 		System.out.println("============================================================\n");
 
 	}
@@ -76,18 +52,4 @@ public class Exercise {
 		}
 
 	}
-
-	private static void printLastNameBeginWith(List<Person> peoples, String startsWith) {
-		for (Person person : peoples) {
-			if (person.getLastName().startsWith(startsWith))
-				System.out.println(person);
-		}
-	}
-
-	private static void printAll(List<Person> peoples) {
-		for (Person person : peoples) {
-			System.out.println(person);
-		}
-	}
-
 }
