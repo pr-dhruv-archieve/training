@@ -7,5 +7,8 @@ public class LembdaTest {
 	public static void main(String[] args) {
 		Lembda1 printing = () -> System.out.println("Hello World");
 		Lembda2 adding = (int a, int b) -> a + b; 
+		
+		printing.foo();
+		System.out.println(adding.foo(5,5));
 	}
 }
